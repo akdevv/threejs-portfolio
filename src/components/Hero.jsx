@@ -1,3 +1,4 @@
+import Button from "./Button";
 import { Suspense } from "react";
 import HeroCamera from "./HeroCamera";
 import { Canvas } from "@react-three/fiber";
@@ -37,7 +38,7 @@ function Hero() {
 					<span className="waving-hand">👋</span>
 				</p>
 				<p className="hero_tag text-gray_gradient">
-					Student & Developer based in India.
+					Student & Developer.
 				</p>
 			</div>
 
@@ -68,6 +69,16 @@ function Hero() {
 						/>
 					</Suspense>
 				</Canvas>
+			</div>
+
+			<div className="absolute left-0 right-0 z-10 w-full bottom-7 c-space">
+				<a href="#contact" className="w-fit">
+					<Button
+						isBeam
+						name="Let's work together"
+						containerClass="sm:w-fit w-full sm:min-w-96"
+					/>
+				</a>
 			</div>
 		</section>
 	);
