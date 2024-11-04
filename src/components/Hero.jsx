@@ -1,11 +1,16 @@
-import Target from "./Target";
 import { Suspense } from "react";
-import HackerRoom from "./HackerRoom";
-import CanvasLoader from "./CanvasLoader";
+import HeroCamera from "./HeroCamera";
 import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";
 import { calculateSizes } from "../constants/index";
 import { PerspectiveCamera } from "@react-three/drei";
+
+import Cube from "./3d-models/Cube";
+import Rings from "./3d-models/Rings";
+import Target from "./3d-models/Target";
+import ReactLogo from "./3d-models/ReactLogo";
+import HackerRoom from "./3d-models/HackerRoom";
+import CanvasLoader from "./3d-models/CanvasLoader";
 
 function Hero() {
 	const isSmall = useMediaQuery({ maxWidth: 440 });
@@ -42,13 +47,18 @@ function Hero() {
 				<Canvas className="w-full h-full">
 					<Suspense fallback={<CanvasLoader />}>
 						<PerspectiveCamera makeDefault position={[0, 0, 30]} />
-						<HackerRoom
-							scale={sizes.deskScale}
-							position={sizes.deskPosition}
-							rotation={[0, -Math.PI, 0]}
-						/>
+						<HeroCamera isMobile={isMobile}>
+							<HackerRoom
+								scale={sizes.deskScale}
+								position={sizes.deskPosition}
+								rotation={[0, -Math.PI, 0]}
+							/>
+						</HeroCamera>
 						<group>
 							<Target position={sizes.targetPosition} />
+							<ReactLogo position={sizes.reactLogoPosition} />
+							<Cube position={sizes.cubePosition} />
+							<Rings position={sizes.ringPosition} />
 						</group>
 
 						<ambientLight intensity={1} />
