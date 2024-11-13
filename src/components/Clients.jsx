@@ -33,6 +33,7 @@ function Clients() {
 											<img
 												key={index}
 												src="/assets/star.png"
+												className="w-5 h-5"
 											/>
 										)
 									)}
