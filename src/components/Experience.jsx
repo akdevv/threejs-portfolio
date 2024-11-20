@@ -1,64 +1,99 @@
+import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+
+import Developer from "./3d-models/Developer.jsx";
+import CanvasLoader from "./3d-models/CanvasLoader.jsx";
 import { workExperiences } from "../constants/index.js";
 
-function Experience() {
+const WorkExperience = () => {
+	const [animationName, setAnimationName] = useState("idle");
+
 	return (
-		<section className="my-20 c-space">
+		<section className="my-20 c-space" id="work">
 			<div className="w-full text-white-600">
-				<h3 className="head-text">My Work Experience</h3>
+				<p className="head-text">My Work Experience</p>
 
 				<div className="work-container">
 					<div className="work-canvas">
-						<Canvas></Canvas>
-					</div>
-				</div>
+						<Canvas>
+							<ambientLight intensity={7} />
+							<spotLight
+								position={[10, 10, 10]}
+								angle={0.15}
+								penumbra={1}
+							/>
+							<directionalLight
+								position={[10, 10, 10]}
+								intensity={1}
+							/>
+							<OrbitControls
+								enableZoom={false}
+								maxPolarAngle={Math.PI / 2}
+							/>
 
-				<div className="work-content">
-					<div className="py-5 sm:py-10 sm:px-5 px-2.5">
-						{workExperiences.map(
-							({
-								id,
-								icon,
-								name,
-								pos,
-								duration,
-								title,
-								animation,
-							}) => (
+							<Suspense fallback={<CanvasLoader />}>
+								<Developer
+									position-y={-3}
+									scale={3}
+									animationName={animationName}
+								/>
+							</Suspense>
+						</Canvas>
+					</div>
+
+					<div className="work-content">
+						<div className="sm:py-10 py-5 sm:px-5 px-2.5">
+							{workExperiences.map((item, index) => (
 								<div
-									key={id}
+									key={index}
+									onClick={() =>
+										setAnimationName(
+											item.animation.toLowerCase()
+										)
+									}
+									onPointerOver={() =>
+										setAnimationName(
+											item.animation.toLowerCase()
+										)
+									}
+									onPointerOut={() =>
+										setAnimationName("idle")
+									}
 									className="work-content_container group"
 								>
 									<div className="flex flex-col items-center justify-start h-full py-2">
 										<div className="work-content_logo">
 											<img
-												src={icon}
-												alt="logo"
 												className="w-full h-full"
+												src={item.icon}
+												alt=""
 											/>
 										</div>
+
 										<div className="work-content_bar" />
 									</div>
 
 									<div className="sm:p-5 px-2.5 py-5">
 										<p className="font-bold text-white-800">
-											{name}
+											{item.name}
 										</p>
 										<p className="mb-5 text-sm">
-											{pos} -- {duration}
+											{item.pos} --{" "}
+											<span>{item.duration}</span>
 										</p>
-										<p className="transition duration-500 ease-in-out group-hover:text-white">
-											{title}
+										<p className="transition-all duration-500 ease-in-out group-hover:text-white">
+											{item.title}
 										</p>
 									</div>
 								</div>
-							)
-						)}
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	);
-}
+};
 
-export default Experience;
+export default WorkExperience;

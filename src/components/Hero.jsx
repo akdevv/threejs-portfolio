@@ -31,7 +31,7 @@ function Hero() {
 	// });
 
 	return (
-		<section className="relative flex flex-col w-full min-h-screen">
+		<section className="relative flex flex-col w-full min-h-screen" id="home">
 			<div className="flex flex-col w-full gap-3 mx-auto mt-20 sm:mt-36 c-space">
 				<p className="text-2xl font-medium text-center text-white sm:text-3xl font-generalsans">
 					Hi, I&apos;m Ashish Kumar{" "}

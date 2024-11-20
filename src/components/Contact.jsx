@@ -50,8 +50,8 @@ function Contact() {
 	};
 
 	return (
-		<section className="my-20 c-space">
-			<div className="relative flex flex-col items-center justify-center min-h-screen">
+		<section className="my-20 c-space" id="contact">
+			<div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
 				<img
 					src="/assets/terminal.png"
 					alt="terminal background"
