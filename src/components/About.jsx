@@ -27,7 +27,7 @@ function About() {
 							<p className="grid-subtext">
 								With 3 years of experience, I have honed my
 								skills in frontend and backend development, with
-								a focus on animated 3d websites.
+								a focus on Next.js and React websites.
 							</p>
 						</div>
 					</div>
